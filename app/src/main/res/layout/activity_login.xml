@@ -25,12 +25,14 @@
             android:id="@+id/txtCodigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/usuario"
             android:hint="Código"/>
 
         <EditText
             android:id="@+id/txtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/candado"
             android:hint="Contraseña"
             android:inputType="textPassword"/>
 
@@ -39,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/llave"
             android:text="Ingresar"/>
 
     </LinearLayout>
