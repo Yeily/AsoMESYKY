@@ -5,62 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AporteActivity">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:theme="@style/Titulo"
-            android:text="Nuevo aporte"/>
+            android:text="Nuevo aporte"
+            android:theme="@style/Titulo" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Código"
-            android:drawableLeft="@drawable/usuario"/>
+            android:drawableLeft="@drawable/usuario"
+            android:hint="Código" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:hint="Nombre" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fecha"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:hint="Fecha" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Monto"
-            android:drawableLeft="@drawable/money"/>
+            android:drawableLeft="@drawable/money"
+            android:hint="Monto" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Periodo"
-            android:drawableLeft="@drawable/ayuda"/>
+            android:drawableLeft="@drawable/ayuda"
+            android:hint="Periodo" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Año"/>
+            android:hint="Año" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Guardar"
-            android:drawableLeft="@drawable/guardar" />
+            android:drawableLeft="@drawable/guardar"
+            android:text="Guardar" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
