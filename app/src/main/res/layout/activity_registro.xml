@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AporteActivity">
+    tools:context=".RegistroActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,35 +30,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Nuevo aporte"
+            android:text="Nuevo socio"
             android:theme="@style/Titulo" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtCodigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/usuario"
-                android:text="Código: "/>
-
-            <Spinner
-                android:id="@+id/cmbNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:spinnerMode="dialog" />
-        </LinearLayout>
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/usuario"
+            android:hint="Código"/>
 
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:enabled="false"/>
+            android:hint="Nombre"
+            android:drawableLeft="@drawable/usuario"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,49 +70,21 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/txtMonto"
+            android:id="@+id/txtTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/money"
-            android:hint="Monto" />
+            android:drawableLeft="@drawable/telefono"
+            android:hint="Teléfono" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/usuario"
-                android:text="Periodo: "/>
-
-            <Spinner
-                android:id="@+id/cmbPeriodo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:spinnerMode="dialog"
-                android:entries="@array/periodos"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/usuario"
-                android:text="Año: "/>
-
-            <EditText
-                android:id="@+id/txtAño"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
+            android:drawableLeft="@drawable/correo"
+            android:hint="Correo" />
 
         <Button
-            android:id="@+id/btnIngresar"
+            android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

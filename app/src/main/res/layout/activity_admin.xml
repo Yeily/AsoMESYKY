@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/barNavegacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="?attr/homeAsUpIndicator">
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,11 +37,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Registrar nuevo aporte: "/>
+
             <ImageButton
                 android:id="@+id/btnNuevoAporte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/money"/>
+                android:src="@drawable/money"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +60,8 @@
                 android:id="@+id/btnNuevoSocio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/nuevo_socio"/>
+                android:src="@drawable/nuevo_socio"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +78,8 @@
                 android:id="@+id/btnNuevaInversion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/inversion"/>
+                android:src="@drawable/inversion"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +96,8 @@
                 android:id="@+id/btnGanancia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ganancia"/>
+                android:src="@drawable/ganancia"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +114,8 @@
                 android:id="@+id/btnGasto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/gasto"/>
+                android:src="@drawable/gasto"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,13 +131,15 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="12dp"
                 android:hint="Código"/>
             <ImageButton
                 android:id="@+id/btnResetPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/flash"
-                android:padding="5dp"/>
+                android:padding="5dp"
+                android:theme="@style/TemaBotones"/>
         </LinearLayout>
 
     </LinearLayout>

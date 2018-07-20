@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:drawableLeft="@drawable/llave"
-            android:text="Ingresar"/>
+            android:text="Ingresar"
+            android:theme="@style/TemaBotones"/>
 
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AporteActivity">
+    tools:context=".InversionActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -15,50 +15,45 @@
             android:id="@+id/barNavegacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="?attr/homeAsUpIndicator">
-        </android.support.v7.widget.Toolbar>
+            app:navigationIcon="?attr/homeAsUpIndicator"></android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Nuevo aporte"
+            android:text="Registrar inversión"
             android:theme="@style/Titulo" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtDocumento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/usuario"
-                android:text="Código: "/>
-
-            <Spinner
-                android:id="@+id/cmbNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:spinnerMode="dialog" />
-        </LinearLayout>
+            android:gravity="center_vertical"
+            android:hint="Documento" />
 
         <EditText
-            android:id="@+id/txtNombre"
+            android:id="@+id/txtComprobante"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:enabled="false"/>
+            android:hint="Comprobante" />
+
+        <EditText
+            android:id="@+id/txtEntidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Entidad" />
+
+        <EditText
+            android:id="@+id/txtPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Plan" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,71 +61,96 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/txtFecha"
+                android:id="@+id/txtFechaInicio"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="Fecha"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:hint="Fecha de inicio"
+                android:inputType="date" />
 
             <ImageButton
-                android:id="@+id/btnFecha"
+                android:id="@+id/btnFechaInicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/calendario"
-                android:theme="@style/TemaBotones"/>
+                android:theme="@style/TemaBotones" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtFechaVencimiento"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="Fecha de vencimiento"
+                android:inputType="date" />
+
+            <ImageButton
+                android:id="@+id/btnFechaVencimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendario"
+                android:theme="@style/TemaBotones" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/txtMonto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/money"
             android:hint="Monto" />
+
+        <EditText
+            android:id="@+id/txtInteresAnual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Interes anual" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:drawableLeft="@drawable/usuario"
-                android:text="Periodo: "/>
+                android:gravity="center_vertical"
+                android:text="Periodo: " />
 
             <Spinner
                 android:id="@+id/cmbPeriodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:spinnerMode="dialog"
-                android:entries="@array/periodos"/>
+                android:entries="@array/periodos"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:drawableLeft="@drawable/usuario"
-                android:text="Año: "/>
+                android:gravity="center_vertical"
+                android:text="Año: " />
 
             <EditText
                 android:id="@+id/txtAño"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnIngresar"
+            android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/guardar"
             android:hint="Guardar"
             android:theme="@style/TemaBotones" />
-    </LinearLayout>
 
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
