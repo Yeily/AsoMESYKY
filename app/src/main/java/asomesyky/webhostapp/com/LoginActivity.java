@@ -74,33 +74,32 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     public void onResponse(JSONObject response) {
         barProgreso.hide();
 
-        try {
-            String e = response.getString("resultado");
-            Toast.makeText(this, e, Toast.LENGTH_SHORT).show();
-        } catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-
         Socio user = new Socio();
         JSONArray datosJSON = response.optJSONArray("datos");
         JSONObject datos = null;
-
 
         try {
             String estado = response.getString("resultado");
 
             if(estado.equals("OK")) {
-                datos = datosJSON.getJSONObject(1);
+                datos = datosJSON.getJSONObject(0);
                 user.setCodigo(datos.optString("Socio"));
                 user.setNombre(datos.optString("Nombre"));
                 user.setPass(datos.optString("Pass"));
-                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 String strFecha = datos.optString("FechaIngreso");
                 Date fecha = formato.parse(strFecha);
                 user.setFechaIngreso(fecha);
                 user.setActivo(Boolean.parseBoolean(datos.optString("Activo")));
                 user.setTelefono(datos.optString("Telefono"));
                 user.setCorreo(datos.optString("Correo"));
+
+                try {
+                    String e = response.getString("resultado");
+                    Toast.makeText(this, e, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
 
                 Toast.makeText(this, USUARIO, Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, txtPass.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -117,9 +116,9 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 Toast.makeText(this, "El código ''"+USUARIO+"'' no existe.", Toast.LENGTH_SHORT).show();
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
-            e.printStackTrace();
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }
