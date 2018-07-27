@@ -21,21 +21,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
 import asomesyky.webhostapp.com.Entidades.Socio;
+import asomesyky.webhostapp.com.Globales.Convertir;
+import asomesyky.webhostapp.com.Globales.Global;
+import asomesyky.webhostapp.com.Globales.PeticionWEB;
 
-public class LoginActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+//public class LoginActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText txtCodigo;
     private EditText txtPass;
     private Button btnIngresar;
     private ProgressDialog barProgreso;
 
-    private RequestQueue respuesta;
-    private JsonObjectRequest objJSON;
+    //private RequestQueue respuesta;
+    //private JsonObjectRequest objJSON;
 
     private static String USUARIO;
 
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         txtPass = (EditText) findViewById(R.id.txtPass);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
 
-        respuesta = Volley.newRequestQueue(this);
+        //respuesta = Volley.newRequestQueue(this);
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,47 +63,36 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         InicializarComponentes();
     }
 
-    @Override
+    /*@Override
     public void onErrorResponse(VolleyError error) {
         barProgreso.hide();
         Toast.makeText(this, "Error al consultar socio: "+error.toString(), Toast.LENGTH_SHORT).show();
         Log.i("ERROR", error.toString());
-    }
+    }*/
 
-    @Override
-    public void onResponse(JSONObject response) {
+
+    private void Verificar(JSONObject response) {
         barProgreso.hide();
-
-        Socio user = new Socio();
-        JSONArray datosJSON = response.optJSONArray("datos");
-        JSONObject datos = null;
-
-        try {
+        Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show();
+        /*try {
+            Socio user = new Socio();
             String estado = response.getString("resultado");
 
             if(estado.equals("OK")) {
-                datos = datosJSON.getJSONObject(0);
+                JSONArray datosJSON = response.optJSONArray("datos");
+                JSONObject datos = datosJSON.getJSONObject(0);
+
                 user.setCodigo(datos.optString("Socio"));
                 user.setNombre(datos.optString("Nombre"));
                 user.setPass(datos.optString("Pass"));
-                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                String strFecha = datos.optString("FechaIngreso");
-                Date fecha = formato.parse(strFecha);
-                user.setFechaIngreso(fecha);
+                user.setFechaIngreso(Convertir.ToFecha("yyyy-MM-dd"));
                 user.setActivo(Boolean.parseBoolean(datos.optString("Activo")));
                 user.setTelefono(datos.optString("Telefono"));
                 user.setCorreo(datos.optString("Correo"));
 
-                try {
-                    String e = response.getString("resultado");
-                    Toast.makeText(this, e, Toast.LENGTH_SHORT).show();
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-                Toast.makeText(this, USUARIO, Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, txtPass.getText().toString(), Toast.LENGTH_SHORT).show();
                 if(txtPass.getText().toString().equals(user.getPass())) {
+                    Global.usuarioActual = user;
+
                     if(USUARIO.equals("00-000")) {
                         startActivity(new Intent(this, AdminActivity.class));
                     } else {
@@ -117,10 +106,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
             }
         } catch (JSONException e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-        } catch (ParseException e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-        }
-
+        }*/
     }
 
     private void Loguear() {
@@ -130,8 +116,12 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         barProgreso.setMessage("Verificando...");
         barProgreso.show();
 
-        objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-        respuesta.add(objJSON);
+        PeticionWEB peticion = new PeticionWEB(this, url);
+        //JSONObject respuesta = peticion.getDatosJSON("datos");
+        //Verificar(respuesta);
+        //objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+        //respuesta.add(objJSON);
+
     }
 
 }

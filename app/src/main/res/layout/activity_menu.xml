@@ -58,13 +58,6 @@
                 android:layout_height="wrap_content"
                 android:text="¢ 0.00"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="20dp">
-
-        </LinearLayout>
 
     </LinearLayout>
 
