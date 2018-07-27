@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class PeticionWEB implements Response.Listener<JSONObject>, Response.ErrorListener {
     private Context contexto;
     //private Response.Listener<JSONObject> listener;
-    //private JSONObject datosJSON;
+    private JSONObject datosJSON = null;
 
     private RequestQueue respuesta;
     private JsonObjectRequest objJSON;
@@ -45,24 +45,25 @@ public class PeticionWEB implements Response.Listener<JSONObject>, Response.Erro
 
     @Override
     public void onResponse(JSONObject response) {
-        /*try {
-            Toast.makeText(contexto, "Hasta aqui todo bien", Toast.LENGTH_SHORT).show();
-            //datosJSON = response;
-        } catch(Exception ex) {
-            Toast.makeText(contexto, ex.toString(), Toast.LENGTH_SHORT).show();
-        }*/
-
-    }
-
-    /*public JSONObject getDatosJSON(String key) {
-        JSONObject result = null;
-
         try {
-            JSONArray datos = datosJSON.optJSONArray(key);
-            result = datos.getJSONObject(0);
+            datosJSON = response;
+            Toast.makeText(contexto, "onResponse", Toast.LENGTH_SHORT).show();
         } catch(Exception ex) {
             Toast.makeText(contexto, ex.toString(), Toast.LENGTH_SHORT).show();
         }
-        return result;
-    }*/
+
+    }
+
+    public JSONObject getDatosJSON(String key) {
+        //JSONObject result = null;
+
+        try {
+            //JSONArray datos = datosJSON.optJSONArray(key);
+            //result = datos.getJSONObject(0);
+            Toast.makeText(contexto, "getDatosJSON", Toast.LENGTH_SHORT).show();
+        } catch(Exception ex) {
+            Toast.makeText(contexto, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
+        return datosJSON;
+    }
 }

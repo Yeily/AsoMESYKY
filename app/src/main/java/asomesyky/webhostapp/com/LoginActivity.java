@@ -73,7 +73,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Verificar(JSONObject response) {
         barProgreso.hide();
-        Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show();
+//        try {
+            Toast.makeText(this, "Verificar", Toast.LENGTH_SHORT).show();
+////        } catch (JSONException e) {
+////            e.printStackTrace();
+////        }
         /*try {
             Socio user = new Socio();
             String estado = response.getString("resultado");
@@ -117,8 +121,13 @@ public class LoginActivity extends AppCompatActivity {
         barProgreso.show();
 
         PeticionWEB peticion = new PeticionWEB(this, url);
-        //JSONObject respuesta = peticion.getDatosJSON("datos");
-        //Verificar(respuesta);
+        JSONObject respuesta = peticion.getDatosJSON("resultado");
+        /*try {
+            Toast.makeText(this, respuesta.getString("resultado"), Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }*/
+        Verificar(respuesta);
         //objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         //respuesta.add(objJSON);
 
