@@ -24,7 +24,6 @@ import java.text.DecimalFormat;
 import asomesyky.webhostapp.com.Globales.Global;
 
 public class MenuActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
-    private Toolbar barNavegacion;
     private TextView lblNombre;
     private TextView lblSaldo;
 
