@@ -1,16 +1,15 @@
 <?php
 	error_reporting(E_ALL ^ E_DEPRECATED);
 	
-	require_once('./adminBD/confingBD.php');
+	require_once('./adminBD/configBD.php');
 	
-	class ConexionBD(){
+	class ConexionBD {
 		private static $cxn = null;
 		private static $pdo;
 		
 		public function __construct() {
 			try {
 				self::getInstancia();
-				self::conectar();
 			} catch(PDOException $ex) {
 				echo $ex;
 			}
@@ -26,7 +25,7 @@
 			return self::$cxn; 
 		}
 		
-		protected function conectar() {
+		public function conectar() {
 			if(self::$pdo == null) {
 				self::$pdo = new PDO(
 					'mysql:dbname='.BD_NOMBRE.';host='.BD_SERVIDOR.';port:63343;',
