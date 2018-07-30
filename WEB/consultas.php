@@ -27,6 +27,14 @@
 		                    $error = "Falta el identificador";
 		                }
                         break;
+					case 4:
+						if(isset($_GET['socio'])){
+                            $identificador = $_GET['socio'];
+		                    $respuesta = Datos::getSaldo($identificador);
+                        }else{
+		                    $error = "Falta el identificador";
+		                }
+                        break;9o
 			    }
 				
 				$contenedor = array();
