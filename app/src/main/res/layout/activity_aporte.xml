@@ -55,7 +55,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/txtNombre"
+            android:id="@+id/txtCodigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre"
@@ -79,7 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/calendario"
-                android:theme="@style/TemaBotones"/>
+                android:theme="@style/TemaBotones"
+                android:onClick="btnFecha_Click"/>
         </LinearLayout>
 
         <EditText
@@ -125,13 +126,15 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnIngresar"
+            android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/guardar"
             android:hint="Guardar"
-            android:theme="@style/TemaBotones" />
+            android:theme="@style/TemaBotones"
+            android:onClick="btnGuardar_Click"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

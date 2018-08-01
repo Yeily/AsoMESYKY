@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     }
 
     private void Loguear() {
-        String url = "https://asomesyky.000webhostapp.com/consultas.php?c=2&socio="+USUARIO;
+        String url = Global.URL+"c=2&socio="+USUARIO;
 
         barProgreso = new ProgressDialog(this);
         barProgreso.setMessage("Verificando...");
