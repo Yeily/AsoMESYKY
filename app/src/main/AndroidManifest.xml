@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Actividades.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".InversionActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".AporteActivity" />
+        <activity android:name=".Actividades.MenuActivity" />
+        <activity android:name=".Actividades.InversionActivity" />
+        <activity android:name=".Actividades.AdminActivity" />
+        <activity android:name=".Actividades.RegistroActivity" />
+        <activity android:name=".Actividades.AporteActivity" />
     </application>
 
 </manifest>

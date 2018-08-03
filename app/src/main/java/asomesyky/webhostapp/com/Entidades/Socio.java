@@ -58,4 +58,9 @@ public class Socio {
     public void setCorreo(String correo) {
         this.pCorreo = correo;
     }
+
+    @Override
+    public String toString() {
+        return pNombre;
+    }
 }

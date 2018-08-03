@@ -1,9 +1,11 @@
-package asomesyky.webhostapp.com;
+package asomesyky.webhostapp.com.Actividades;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import asomesyky.webhostapp.com.R;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
 

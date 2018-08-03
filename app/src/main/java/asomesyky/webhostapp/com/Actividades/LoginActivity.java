@@ -1,4 +1,4 @@
-package asomesyky.webhostapp.com;
+package asomesyky.webhostapp.com.Actividades;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import asomesyky.webhostapp.com.Entidades.Socio;
 import asomesyky.webhostapp.com.Globales.Convertir;
 import asomesyky.webhostapp.com.Globales.Global;
+import asomesyky.webhostapp.com.R;
 
 public class LoginActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
 

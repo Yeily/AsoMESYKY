@@ -1,13 +1,15 @@
-package asomesyky.webhostapp.com;
+package asomesyky.webhostapp.com.Actividades;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RegistroActivity extends AppCompatActivity {
+import asomesyky.webhostapp.com.R;
+
+public class InversionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_inversion);
     }
 }

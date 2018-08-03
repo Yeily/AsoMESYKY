@@ -1,4 +1,4 @@
-package asomesyky.webhostapp.com;
+package asomesyky.webhostapp.com.Actividades;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 
 import asomesyky.webhostapp.com.Globales.Global;
+import asomesyky.webhostapp.com.R;
 
 public class MenuActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
     private TextView lblNombre;
