@@ -89,7 +89,9 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 user.setTelefono(datos.optString("Telefono"));
                 user.setCorreo(datos.optString("Correo"));
 
-                if(txtPass.getText().toString().equals(user.getPass())) {
+                if (user.getPass().isEmpty() || user.getPass().equals(" ")) {
+                    startActivity(new Intent(this, PasswordActivity.class));
+                } else if(txtPass.getText().toString().equals(user.getPass())) {
                     Global.usuarioActual = user;
 
                     txtPass.setText("");
@@ -110,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     }
 
     private void Loguear() {
-        String url = Global.URL+"c=2&socio="+USUARIO;
+        String url = Global.URL+"?c=2&socio="+USUARIO;
 
         barProgreso = new ProgressDialog(this);
         barProgreso.setMessage("Verificando...");

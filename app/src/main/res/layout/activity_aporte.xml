@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:hint="Fecha"
+                android:drawableLeft="@drawable/calendario"
                 android:enabled="false"/>
 
             <ImageButton

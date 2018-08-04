@@ -54,12 +54,6 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     private JsonObjectRequest objJSON;
     private StringRequest strJSON;
     private ArrayList<Socio> listaSocios = new ArrayList<>();
-    //private Boolean guardar = false;
-
-    private final Calendar calendario = Calendar.getInstance();
-    private final int año = calendario.get(calendario.YEAR);
-    private final int mes = calendario.get(calendario.MONTH);
-    private final int dia = calendario.get(calendario.DAY_OF_MONTH);
 
     private void InicializarComponentes() {
         cmbNombre = (Spinner) findViewById(R.id.cmbNombre);
@@ -104,17 +98,13 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     @Override
     public void onResponse(JSONObject response) {
         try {
-            /*if(guardar){
-                Toast.makeText(this, "Vamos a guardar", Toast.LENGTH_SHORT).show();
-            } else {*/
-                String estado = response.getString("resultado");
+            String estado = response.getString("resultado");
 
-                if (estado.equals("OK")) {
-                    CargarSpinner(response);
-                } else {
-                    Toast.makeText(this, response.getString("resultado"), Toast.LENGTH_SHORT).show();
-                }
-            //}
+            if (estado.equals("OK")) {
+                CargarSpinner(response);
+            } else {
+                Toast.makeText(this, response.getString("resultado"), Toast.LENGTH_SHORT).show();
+            }
         } catch (JSONException e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
@@ -125,12 +115,17 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     public void btnFecha_Click(View view) {
+        final Calendar calendario = Calendar.getInstance();
+        final int año = calendario.get(calendario.YEAR);
+        final int mes = calendario.get(calendario.MONTH);
+        final int dia = calendario.get(calendario.DAY_OF_MONTH);
+
         DatePickerDialog fecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int a, int m, int d) {
                 final int mesActual = m+1;
                 String diaFormateado = (d < 10)? "0"+String.valueOf(d) : String.valueOf(d);
-                String mesFormateado = (m < 10)? "0"+String.valueOf(m) : String.valueOf(d);
+                String mesFormateado = (mesActual < 10)? "0"+String.valueOf(mesActual) : String.valueOf(mesActual);
 
                 txtFecha.setText(a +"-"+ mesFormateado +"-"+ diaFormateado);
             }
@@ -140,14 +135,23 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     public void btnGuardar_Click(View view) {
-        //String url = Global.URL+"c=5&socio="+txtCodigo.getText().toString()+"&fecha="+txtFecha.getText().toString()+"&monto="+txtMonto.getText().toString()+"&periodo="+cmbPeriodo.getSelectedItem().toString()+"&año="+txtAño.getText().toString();
-        String url = Global.URL+"c=5";
-
-        //objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
-        strJSON = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show();
+        strJSON = new StringRequest(Request.Method.POST, Global.URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject respuestaJSON = new JSONObject(response);
+                    String estado = respuestaJSON.getString("resultado");
+
+                    if (estado.equals("OK")) {
+                        Limpiar();
+                        Toast.makeText(getApplication(), "Transacción guardada correctamente!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplication(), estado, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -169,15 +173,13 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         };
 
         respuesta.add(strJSON);
-        //guardar = true;
     }
 
     private void LlenarDatos() {
-        String url = Global.URL+"c=1";
+        String url = Global.URL+"?c=1";
 
         objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         respuesta.add(objJSON);
-        //guardar = false;
     }
 
     private void CargarSpinner(JSONObject respuestaJSON) {
@@ -199,6 +201,13 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         } catch (JSONException e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void Limpiar() {
+        txtCodigo.setText("");
+        txtFecha.setText("");
+        txtMonto.setText("");
+        txtAño.setText("");
     }
 
 }

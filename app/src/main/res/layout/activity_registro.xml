@@ -16,7 +16,8 @@
             android:id="@+id/barNavegacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="?attr/homeAsUpIndicator">
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            android:onClick="barNavegacion_Click">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
@@ -56,10 +57,11 @@
 
             <EditText
                 android:id="@+id/txtFecha"
-                android:layout_width="280dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:hint="Fecha"
+                android:drawableLeft="@drawable/calendario"
                 android:enabled="false"/>
 
             <ImageButton
@@ -67,7 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/calendario"
-                android:theme="@style/TemaBotones"/>
+                android:theme="@style/TemaBotones"
+                android:onClick="btnFecha_Click"/>
         </LinearLayout>
 
         <EditText
@@ -91,7 +94,8 @@
             android:layout_gravity="center"
             android:drawableLeft="@drawable/guardar"
             android:hint="Guardar"
-            android:theme="@style/TemaBotones" />
+            android:theme="@style/TemaBotones"
+            android:onClick="btnGuardar_Click"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
