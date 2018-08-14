@@ -1,11 +1,9 @@
 package asomesyky.webhostapp.com.Actividades;
 
-import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,23 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
     public void barNavegacion_Click(View view) { finish(); }
 
     public void btnFecha_Click(View view) {
-        final Calendar calendario = Calendar.getInstance();
-        final int año = calendario.get(calendario.YEAR);
-        final int mes = calendario.get(calendario.MONTH);
-        final int dia = calendario.get(calendario.DAY_OF_MONTH);
-
-        DatePickerDialog fecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int a, int m, int d) {
-                final int mesActual = m+1;
-                String diaFormateado = (d < 10)? "0"+String.valueOf(d) : String.valueOf(d);
-                String mesFormateado = (mesActual < 10)? "0"+String.valueOf(mesActual) : String.valueOf(mesActual);
-
-                txtFecha.setText(a +"-"+ mesFormateado +"-"+ diaFormateado);
-            }
-        }, año, mes, dia);
-
-        fecha.show();
+        Global.setFecha(this, txtFecha);
     }
 
     public void btnGuardar_Click(View view) {

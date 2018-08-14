@@ -25,7 +25,8 @@
         <activity android:name=".Actividades.AdminActivity" />
         <activity android:name=".Actividades.RegistroActivity" />
         <activity android:name=".Actividades.AporteActivity" />
-        <activity android:name=".Actividades.PasswordActivity"></activity>
+        <activity android:name=".Actividades.PasswordActivity" />
+        <activity android:name=".Actividades.LiquidaInvActivity"></activity>
     </application>
 
 </manifest>

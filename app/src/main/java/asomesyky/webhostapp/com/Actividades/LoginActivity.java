@@ -89,12 +89,13 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 user.setTelefono(datos.optString("Telefono"));
                 user.setCorreo(datos.optString("Correo"));
 
+                Global.usuarioActual = user;
+
                 if (user.getPass().isEmpty() || user.getPass().equals(" ")) {
                     startActivity(new Intent(this, PasswordActivity.class));
                 } else if(txtPass.getText().toString().equals(user.getPass())) {
-                    Global.usuarioActual = user;
-
                     txtPass.setText("");
+
                     if(USUARIO.equals("00-000")) {
                         startActivity(new Intent(this, AdminActivity.class));
                     } else {

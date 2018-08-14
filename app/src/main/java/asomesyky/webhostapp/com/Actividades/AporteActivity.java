@@ -1,8 +1,5 @@
 package asomesyky.webhostapp.com.Actividades;
 
-import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -30,12 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import asomesyky.webhostapp.com.Entidades.Socio;
-import asomesyky.webhostapp.com.Globales.Convertir;
 import asomesyky.webhostapp.com.Globales.Global;
 import asomesyky.webhostapp.com.R;
 
@@ -115,23 +109,7 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     public void btnFecha_Click(View view) {
-        final Calendar calendario = Calendar.getInstance();
-        final int año = calendario.get(calendario.YEAR);
-        final int mes = calendario.get(calendario.MONTH);
-        final int dia = calendario.get(calendario.DAY_OF_MONTH);
-
-        DatePickerDialog fecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int a, int m, int d) {
-                final int mesActual = m+1;
-                String diaFormateado = (d < 10)? "0"+String.valueOf(d) : String.valueOf(d);
-                String mesFormateado = (mesActual < 10)? "0"+String.valueOf(mesActual) : String.valueOf(mesActual);
-
-                txtFecha.setText(a +"-"+ mesFormateado +"-"+ diaFormateado);
-            }
-        }, año, mes, dia);
-
-        fecha.show();
+        Global.setFecha(this, txtFecha);
     }
 
     public void btnGuardar_Click(View view) {
