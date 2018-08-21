@@ -30,7 +30,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 i = new Intent(this, InversionActivity.class);
                 break;
             case R.id.btnGanancia:
-                i = new Intent(this, AporteActivity.class);
+                i = new Intent(this, LiquidaInvActivity.class);
                 break;
             case R.id.btnGasto:
                 i = new Intent(this, AporteActivity.class);

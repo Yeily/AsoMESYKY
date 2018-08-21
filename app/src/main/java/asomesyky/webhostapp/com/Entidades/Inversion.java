@@ -18,6 +18,7 @@ public class Inversion {
     private Character pLiquidada;
 
     public Inversion() {}
+
     public Inversion(String documento, String comprobante, String entidad, String plan,
                      Date fechaInicial, Date fechaVencimiento, Double monto, Float interesAnual,
                      Double impuestoRenta, Double ganancia, String periodo, Integer año, Character liquidada) {

@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import asomesyky.webhostapp.com.Entidades.Inversion;
+import asomesyky.webhostapp.com.Globales.Convertir;
 import asomesyky.webhostapp.com.R;
 
 public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaInv.ViewHolderLiquidaInv> {
@@ -32,12 +36,12 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
 
         public ViewHolderLiquidaInv(@NonNull View itemView) {
             super(itemView);
-            txtDocumento = (TextView) itemView.findViewById(R.id.txtDocumento);
-            txtFechaInicio = (TextView) itemView.findViewById(R.id.txtFechaInicio);
-            txtFechaVencimiento = (TextView) itemView.findViewById(R.id.txtFechaVencimiento);
-            txtMonto = (TextView) itemView.findViewById(R.id.txtMonto);
-            txtInteres = (TextView) itemView.findViewById(R.id.txtInteresAnual);
-            txtGanancia = (TextView) itemView.findViewById(R.id.txtGanancia);
+            txtDocumento = (TextView) itemView.findViewById(R.id.lblDoc);
+            txtFechaInicio = (TextView) itemView.findViewById(R.id.lblFechaInicio);
+            txtFechaVencimiento = (TextView) itemView.findViewById(R.id.lblFechaFinal);
+            txtMonto = (TextView) itemView.findViewById(R.id.lblMonto);
+            txtInteres = (TextView) itemView.findViewById(R.id.lblInteres);
+            txtGanancia = (TextView) itemView.findViewById(R.id.lblGanancia);
             btnLiquidar = (ImageView) itemView.findViewById(R.id.btnLiquidar);
         }
     }
@@ -51,11 +55,12 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
     @Override
     public void onBindViewHolder(@NonNull AdaptadorLiquidaInv.ViewHolderLiquidaInv holder, int position) {
         holder.txtDocumento.setText(inversiones.get(position).getDocumento());
-        holder.txtFechaInicio.setText(inversiones.get(position).getFechaInicial().toString());
-        holder.txtFechaVencimiento.setText(inversiones.get(position).getFechaVencimiento().toString());
+        holder.txtFechaInicio.setText(Convertir.toFecha(inversiones.get(position).getFechaInicial()));
+        holder.txtFechaVencimiento.setText(Convertir.toFecha(inversiones.get(position).getFechaVencimiento()));
         holder.txtMonto.setText(inversiones.get(position).getMonto().toString());
         holder.txtInteres.setText(inversiones.get(position).getInteresAnual().toString());
         holder.txtGanancia.setText(inversiones.get(position).getGanancia().toString());
+        holder.btnLiquidar.setImageResource(R.drawable.borrar);
     }
 
     @Override

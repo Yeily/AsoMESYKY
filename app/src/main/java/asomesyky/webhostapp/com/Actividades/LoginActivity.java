@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 user.setCodigo(datos.optString("Socio"));
                 user.setNombre(datos.optString("Nombre"));
                 user.setPass(datos.optString("Pass"));
-                user.setFechaIngreso(Convertir.ToFecha("yyyy-MM-dd"));
+                user.setFechaIngreso(Convertir.toFecha(datos.optString("Fecha")));
                 user.setActivo(Boolean.parseBoolean(datos.optString("Activo")));
                 user.setTelefono(datos.optString("Telefono"));
                 user.setCorreo(datos.optString("Correo"));

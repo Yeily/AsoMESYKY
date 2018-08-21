@@ -4,12 +4,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Convertir {
-    public static Date ToFecha(String formato) {
+    public static Date toFecha(String fecha) {
         Date result = null;
 
         try {
-            SimpleDateFormat formatoFecha = new SimpleDateFormat(formato);
-            result = formatoFecha.parse(formato);
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            result = formatoFecha.parse(fecha);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String toFecha(Date fecha) {
+        String result = "";
+
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            result = formato.format(fecha);
         } catch(Exception ex) {
             ex.printStackTrace();
         }

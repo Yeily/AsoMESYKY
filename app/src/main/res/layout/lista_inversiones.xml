@@ -86,7 +86,8 @@
             android:id="@+id/btnLiquidar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/money" />
+            android:src="@drawable/money"
+            android:onClick="btnLiquidar_Click"/>
 
     </LinearLayout>
 </LinearLayout>
