@@ -122,5 +122,4 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         respuesta.add(objJSON);
     }
-
 }

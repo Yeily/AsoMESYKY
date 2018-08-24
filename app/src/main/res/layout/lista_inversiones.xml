@@ -84,10 +84,9 @@
 
         <ImageView
             android:id="@+id/btnLiquidar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/money"
-            android:onClick="btnLiquidar_Click"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/money"/>
 
     </LinearLayout>
 </LinearLayout>

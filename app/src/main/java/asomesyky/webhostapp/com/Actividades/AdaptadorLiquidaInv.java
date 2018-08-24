@@ -2,19 +2,34 @@ package asomesyky.webhostapp.com.Actividades;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import asomesyky.webhostapp.com.Entidades.Inversion;
 import asomesyky.webhostapp.com.Globales.Convertir;
+import asomesyky.webhostapp.com.Globales.Global;
 import asomesyky.webhostapp.com.R;
 
 public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaInv.ViewHolderLiquidaInv> {
@@ -24,7 +39,7 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
         inversiones = lista;
     }
 
-    public class ViewHolderLiquidaInv extends RecyclerView.ViewHolder{
+    public class ViewHolderLiquidaInv extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtDocumento;
         private TextView txtFechaInicio;
         private TextView txtFechaVencimiento;
@@ -33,6 +48,8 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
         private TextView txtGanancia;
         private ImageView btnLiquidar;
 
+        private RequestQueue respuesta;
+        private StringRequest strJSON;
 
         public ViewHolderLiquidaInv(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +60,49 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
             txtInteres = (TextView) itemView.findViewById(R.id.lblInteres);
             txtGanancia = (TextView) itemView.findViewById(R.id.lblGanancia);
             btnLiquidar = (ImageView) itemView.findViewById(R.id.btnLiquidar);
+
+            btnLiquidar.setOnClickListener(this);
+
+            respuesta = Volley.newRequestQueue(itemView.getContext());
+        }
+
+        @Override
+        public void onClick(final View view) {
+            if(view.getId() == btnLiquidar.getId()){
+                strJSON = new StringRequest(Request.Method.POST, Global.URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuestaJSON = new JSONObject(response);
+                            String estado = respuestaJSON.getString("resultado");
+
+                            if(estado.equals("OK")) {
+                                Toast.makeText(view.getContext(), "Inversión ''"+txtDocumento.getText().toString()+"'' liquidada correctamente.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(view.getContext(), response, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ex) {
+                            Toast.makeText(view.getContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(view.getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Log.i("ERROR", error.toString());
+                    }
+                }) {
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("c", "8");
+                        params.put("documento", txtDocumento.getText().toString());
+
+                        return params;
+                    }
+                };
+
+                respuesta.add(strJSON);
+            }
         }
     }
 
