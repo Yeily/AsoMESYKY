@@ -1,6 +1,15 @@
 package asomesyky.webhostapp.com.Entidades;
 
+import android.app.Application;
+import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
 import java.util.Date;
+
+import asomesyky.webhostapp.com.Globales.Convertir;
+import asomesyky.webhostapp.com.Globales.Global;
 
 public class Inversion {
     private String pDocumento;
@@ -18,6 +27,10 @@ public class Inversion {
     private Character pLiquidada;
 
     public Inversion() {}
+
+    public Inversion(JSONObject json) {
+        setInversion(json);
+    }
 
     public Inversion(String documento, String comprobante, String entidad, String plan,
                      Date fechaInicial, Date fechaVencimiento, Double monto, Float interesAnual,
@@ -58,12 +71,41 @@ public class Inversion {
     public void setEntidad(String entidad) { pEntidad = entidad; }
     public void setPlan(String plan) { pPlan = plan; }
     public void setFechaInicial(Date fecha) { pFechaInicial = fecha ; }
+    public void setFechaInicial(String fecha) { pFechaInicial = Convertir.toFecha(fecha); }
     public void setFechaVencimiento(Date fecha) { pFechaVencimiento = fecha; }
+    public void setFechaVencimiento(String fecha) { pFechaVencimiento = Convertir.toFecha(fecha); }
     public void setMonto(Double monto) { pMonto = monto; }
+    public void setMonto(String monto) { pMonto = Double.parseDouble(monto); }
     public void setInteresAnual(Float porcentaje) { pInteresAnual = porcentaje; }
+    public void setInteresAnual(String porcentaje) { pInteresAnual = Float.parseFloat(porcentaje); }
     public void setImpuestoRenta(Double impuestoRenta) { pImpuestoRenta = impuestoRenta; }
+    public void setImpuestoRenta(String impuestoRenta) { pImpuestoRenta = Double.parseDouble(impuestoRenta); }
     public void setGanancia(Double ganancia) { pGanancia = ganancia; }
+    public void setGanancia(String ganancia) { pGanancia = Double.parseDouble(ganancia); }
     public void setPeriodo(String periodo) { pPeriodo = periodo; }
     public void setAño(Integer año) { pAño = año; }
+    public void setAño(String año) { pAño = Integer.parseInt(año); }
     public void setLiquidada(Character liquidada) { pLiquidada = liquidada; }
+    public void setLiquidada(String liquidada) { pLiquidada = liquidada.toCharArray()[0]; }
+
+    //Métodos
+    public void setInversion(JSONObject json) {
+        try {
+            pDocumento = json.getString("Documento");
+            pComprobante = json.getString("Comprobante");
+            pEntidad = json.getString("Entidad");
+            pPlan = json.getString("Plan");
+            pFechaInicial = Convertir.toFecha(json.getString("FechaInicial"));
+            pFechaVencimiento = Convertir.toFecha(json.getString("FechaVencimiento"));
+            pMonto = Double.parseDouble(json.getString("Monto"));
+            pInteresAnual = Float.parseFloat(json.getString("InteresAnual"));
+            pImpuestoRenta = Double.parseDouble(json.getString("ImpuestoRenta"));
+            pGanancia = Double.parseDouble(json.getString("Ganancia"));
+            pPeriodo = json.getString("Periodos");
+            pAño = Integer.parseInt(json.getString("Año"));
+            pLiquidada = json.getString("Liquidada").toCharArray()[0];
+        } catch(Exception ex) {
+            Log.i("ERROR", ex.getMessage());
+        }
+    }
 }

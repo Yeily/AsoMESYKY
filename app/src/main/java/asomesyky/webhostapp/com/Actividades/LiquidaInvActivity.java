@@ -26,7 +26,7 @@ import asomesyky.webhostapp.com.Globales.Convertir;
 import asomesyky.webhostapp.com.Globales.Global;
 import asomesyky.webhostapp.com.R;
 
-public class LiquidaInvActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class LiquidaInvActivity extends AppCompatActivity implements View.OnClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ArrayList<Inversion> inversiones;
     private RecyclerView rvInversones;
 
@@ -41,8 +41,6 @@ public class LiquidaInvActivity extends AppCompatActivity implements Response.Li
         respuesta = Volley.newRequestQueue(this);
 
         GetInversiones();
-        AdaptadorLiquidaInv adp = new AdaptadorLiquidaInv(inversiones);
-        rvInversones.setAdapter(adp);
     }
 
     private void GetInversiones(){
@@ -70,7 +68,6 @@ public class LiquidaInvActivity extends AppCompatActivity implements Response.Li
 
     @Override
     public void onResponse(JSONObject response) {
-        //Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show();
         try {
             String estado = response.getString("resultado");
 
@@ -78,37 +75,20 @@ public class LiquidaInvActivity extends AppCompatActivity implements Response.Li
                 JSONArray datos = response.optJSONArray("datos");
 
                 for(int i = 0; i < datos.length(); i++) {
-                    /*JSONObject dato = datos.getJSONObject(i);
-                    Inversion inv = new Inversion();
-
-                    inv.setDocumento(dato.getString("Documento"));
-                    Toast.makeText(this, inv.getDocumento(), Toast.LENGTH_SHORT).show();
-                    inv.setComprobante(dato.getString("Comprobante"));
-                    inv.setEntidad(dato.getString("Entidad"));
-                    inv.setPlan(dato.getString("Plan"));
-                    inv.setFechaInicial(Convertir.toFecha(dato.getString("FechaInicial")));
-                    inv.setFechaVencimiento(Convertir.toFecha(dato.getString("FechaVencimiento")));
-                    inv.setMonto(Double.parseDouble(dato.getString("Monto")));
-                    inv.setInteresAnual(Float.parseFloat(dato.getString("InteresAnual")));
-                    inv.setImpuestoRenta(Double.parseDouble(dato.getString("ImpuestoRenta")));
-                    inv.setGanancia(Double.parseDouble(dato.getString("Ganancia")));
-                    inv.setPeriodo(dato.getString("Periodos"));
-                    inv.setAño(Integer.parseInt(dato.getString("Ano")));
-                    inv.setLiquidada(dato.getString("Liquidada").toCharArray()[0]);
-
-                    //Toast.makeText(this, datos.getJSONObject(i).toString(), Toast.LENGTH_SHORT).show();
-                    //inversiones.add(inv);
-                    inversiones.add(new Inversion(dato.getString("Documento"), dato.getString("Comprobante"), dato.getString("Entidad"),
-                            dato.getString("Plan"), Convertir.toFecha(dato.getString("FechaInicial")), Convertir.toFecha(dato.getString("FechaVencimiento")),
-                            Double.parseDouble(dato.getString("Monto")), Float.parseFloat(dato.getString("InteresAnual")), Double.parseDouble(dato.getString("ImpuestoRenta")),
-                            Double.parseDouble(dato.getString("Ganancia")), dato.getString("Periodos"), Integer.parseInt(dato.getString("Ano")), dato.getString("Liquidada").toCharArray()[0]));*/
-                    inversiones.add(new Inversion("Documento", "Comprobante", "Entidad", "Plan", Convertir.toFecha("2018-01-01"),
-                            Convertir.toFecha("2018-05-01"), 100.00, Float.parseFloat("5"), Double.parseDouble("200"), Double.parseDouble("300"),
-                            "Periodos", 2018, "N".toCharArray()[0]));
+                    inversiones.add(new Inversion(datos.getJSONObject(i)));
                 }
             }
+
+            AdaptadorLiquidaInv adp = new AdaptadorLiquidaInv(inversiones);
+            rvInversones.setAdapter(adp);
+            adp.notifyDataSetChanged();
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        finish();
     }
 }

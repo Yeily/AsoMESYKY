@@ -34,16 +34,6 @@ public class MenuActivity extends AppCompatActivity implements Response.Listener
     private void InicializarComponentes() {
         lblNombre = (TextView) findViewById(R.id.lblNombre);
         lblSaldo = (TextView) findViewById(R.id.lblSaldo);
-        /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            barNavegacion = (Toolbar) findViewById(R.id.barNavegacion);
-
-            barNavegacion.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
-            });
-        }*/
 
         respuesta = Volley.newRequestQueue(this);
 
@@ -92,7 +82,7 @@ public class MenuActivity extends AppCompatActivity implements Response.Listener
     }
 
     private void RefescarInformacion() {
-        String url = "https://asomesyky.000webhostapp.com/consultas.php?c=3&socio="+ Global.usuarioActual.getCodigo();
+        String url = Global.URL+"?c=3&socio="+ Global.usuarioActual.getCodigo();
 
         objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         respuesta.add(objJSON);
