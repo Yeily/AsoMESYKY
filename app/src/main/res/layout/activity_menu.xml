@@ -62,11 +62,12 @@
                 android:text="¢ 0.00"/>
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcyLista"
+        <Button
+            android:id="@+id/btnInversiones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"/>
+            android:text="Ver inversiones"
+            android:onClick="btnInversiones_Click"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

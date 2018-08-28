@@ -1,5 +1,6 @@
 package asomesyky.webhostapp.com.Actividades;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,5 +87,9 @@ public class MenuActivity extends AppCompatActivity implements Response.Listener
 
         objJSON = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         respuesta.add(objJSON);
+    }
+
+    public void btnInversiones_Click(View view) {
+        Intent i = new Intent(this, InversionesActivity.class);
     }
 }
