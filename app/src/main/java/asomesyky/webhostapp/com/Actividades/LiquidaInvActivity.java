@@ -28,15 +28,15 @@ import asomesyky.webhostapp.com.R;
 
 public class LiquidaInvActivity extends AppCompatActivity implements View.OnClickListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private ArrayList<Inversion> inversiones;
-    private RecyclerView rvInversones;
+    private RecyclerView rvInversiones;
 
     private RequestQueue respuesta;
     private JsonObjectRequest objJSON;
 
     private void InicializarComponentes(){
         inversiones = new ArrayList<>();
-        rvInversones = (RecyclerView) findViewById(R.id.rcyLista);
-        rvInversones.setLayoutManager(new LinearLayoutManager(this));
+        rvInversiones = (RecyclerView) findViewById(R.id.rcyLista);
+        rvInversiones.setLayoutManager(new LinearLayoutManager(this));
 
         respuesta = Volley.newRequestQueue(this);
 
@@ -80,7 +80,7 @@ public class LiquidaInvActivity extends AppCompatActivity implements View.OnClic
             }
 
             AdaptadorLiquidaInv adp = new AdaptadorLiquidaInv(inversiones);
-            rvInversones.setAdapter(adp);
+            rvInversiones.setAdapter(adp);
             adp.notifyDataSetChanged();
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();

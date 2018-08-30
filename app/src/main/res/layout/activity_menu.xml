@@ -66,8 +66,14 @@
             android:id="@+id/btnInversiones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ver inversiones"
+            android:hint="Ver inversiones"
             android:onClick="btnInversiones_Click"/>
+        <Button
+            android:id="@+id/btnMayor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ver distribución"
+            android:onClick="btnMayor_Click"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

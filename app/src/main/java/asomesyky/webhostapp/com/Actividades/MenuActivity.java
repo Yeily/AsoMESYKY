@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -91,5 +92,11 @@ public class MenuActivity extends AppCompatActivity implements Response.Listener
 
     public void btnInversiones_Click(View view) {
         Intent i = new Intent(this, InversionesActivity.class);
+        startActivity(i);
+    }
+
+    public void btnMayor_Click(View view) {
+        Intent i = new Intent(this, MayorActivity.class);
+        startActivity(i);
     }
 }

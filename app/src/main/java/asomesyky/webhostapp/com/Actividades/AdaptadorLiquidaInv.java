@@ -108,7 +108,7 @@ public class AdaptadorLiquidaInv extends RecyclerView.Adapter<AdaptadorLiquidaIn
 
     @Override
     public AdaptadorLiquidaInv.ViewHolderLiquidaInv onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_inversiones, null, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_liquidainv, null, false);
         return new ViewHolderLiquidaInv(v);
     }
 
