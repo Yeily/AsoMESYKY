@@ -2,10 +2,14 @@ package asomesyky.webhostapp.com.Globales;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import asomesyky.webhostapp.com.Entidades.Socio;
 
@@ -33,5 +37,10 @@ public class Global {
         }, año, mes, dia);
 
         fecha.show();
+    }
+
+    public static int getColor() {
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 }
