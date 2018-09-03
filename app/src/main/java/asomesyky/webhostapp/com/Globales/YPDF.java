@@ -22,6 +22,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class YPDF {
@@ -30,7 +31,6 @@ public class YPDF {
     private File pdf;
     private Document doc;
     private PdfWriter escritor;
-    //private Paragraph parrafo;
 
     private Font FUENTE_TITULO = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
     private Font FUENTE_SUBTITULO = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
@@ -42,13 +42,19 @@ public class YPDF {
     }
 
     private void crearPDF(String nombrePDF) {
-        File folder = new File(Environment.getExternalStorageDirectory().toString(), Environment.DIRECTORY_DOWNLOADS+"/Recibos AsoMESYKY");
+        File folder = new File(Environment.getExternalStorageDirectory().toString(), Environment.DIRECTORY_DOWNLOADS);
+        folder = new File(folder, "Recibos_AsoMESYKY");
 
         if(!folder.exists()) {
             folder.mkdirs();
         }
 
-        pdf = new File(folder, nombrePDF);
+        try {
+            pdf = new File(folder, nombrePDF);
+            pdf.createNewFile();
+        } catch(IOException ex) {
+            Log.e("Error", ex.toString());
+        }
     }
 
     private void agregarParrafoHijo(Paragraph parrafoHijo) {
@@ -157,7 +163,11 @@ public class YPDF {
             }
         }
         else {
-            Toast.makeText(actividad.getApplicationContext(), "El archivo indicado no existe", Toast.LENGTH_LONG).show();
+            Toast.makeText(actividad.getApplicationContext(), "El archivo ''"+pdf+"'' no existe", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public String rutaPDF() {
+        return pdf.getPath();
     }
 }

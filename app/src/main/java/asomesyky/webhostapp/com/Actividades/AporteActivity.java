@@ -185,7 +185,8 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         YPDF pdf = new YPDF(getApplicationContext());
 
         try {
-            pdf.abrirPDF("Recibo "+txtFecha.getText()+"_"+txtCodigo.getText());
+            pdf.abrirPDF("Recibo_"+txtFecha.getText()+"_"+txtCodigo.getText()+".pdf");
+            //Toast.makeText(this, pdf.rutaPDF(), Toast.LENGTH_LONG).show();
             pdf.agregarMetaDatos("AsoMESYKY", "Recibo", "Administrador", "Yeily Calderon Marin");
             pdf.agregarTitulos("Comprobante de recibo de AsoMESYKY", "", txtFecha.getText().toString());
             pdf.agregarTabla(getEncabezados(), getDatos());
