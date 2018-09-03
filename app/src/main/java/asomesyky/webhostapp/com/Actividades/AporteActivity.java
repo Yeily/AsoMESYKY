@@ -1,10 +1,5 @@
 package asomesyky.webhostapp.com.Actividades;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.graphics.pdf.PdfDocument;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,42 +20,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.HeaderFooter;
-import com.lowagie.text.Image;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.Table;
-import com.lowagie.text.pdf.ColumnText;
-import com.lowagie.text.pdf.PdfWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import asomesyky.webhostapp.com.Entidades.Socio;
 import asomesyky.webhostapp.com.Globales.Global;
+import asomesyky.webhostapp.com.Globales.YPDF;
 import asomesyky.webhostapp.com.R;
-import harmony.java.awt.Color;
 
 public class AporteActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
-    private final static String DIR_RECIBOS = "Recibos_AsoMESYKY";
-    private final static String NOMBRE_RECIBO = "Recibo ";
-    private final static String ETIQUETA_ERROR = "Error:";
-
     private Spinner cmbNombre;
     private EditText txtCodigo;
     private EditText txtFecha;
@@ -207,111 +181,42 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         }
     }
 
-    /*private void GenerarRecibo() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            PdfDocument pdf = new PdfDocument();
-            PdfDocument.PageInfo info = new PdfDocument.PageInfo.Builder(1, 1, 1).create();
-            PdfDocument.Page pag = pdf.startPage(info);
-            // draw something on the page
-            View content = this.btnFecha;
-            content.draw(pag.getCanvas());
-
-            // finish the page
-            pdf.finishPage(pag);
-            // write the document content
-            OutputStream stream = new OutputStream() {
-                @Override
-                public void write(int i) throws IOException {
-
-                }
-            };
-            pdf.writeTo(stream);
-
-            // close the document
-            pdf.close();
-        }
-    }*/
-
     private void GenerarRecibo() {
-        Document doc = new Document();
-        Font tipoFuente1 = FontFactory.getFont(FontFactory.HELVETICA, 28, Font.BOLD, Color.RED);
-        Font tipoFuente2 = FontFactory.getFont(FontFactory.HELVETICA, 42, Font.BOLD, Color.GRAY);
+        YPDF pdf = new YPDF(getApplicationContext());
 
         try {
-            File archivo = CrearArchivo(NOMBRE_RECIBO+txtFecha.getText().toString()+"_"+txtCodigo.getText().toString()+".pdf");
-            FileOutputStream archivoPDF = new FileOutputStream(archivo.getAbsolutePath());
-            PdfWriter pdf = PdfWriter.getInstance(doc, archivoPDF);
-            HeaderFooter cabecera = new HeaderFooter(new Phrase("Recibo de aporte de ahorro"), false);
-            HeaderFooter pie = new HeaderFooter(new Phrase("Guardese bien!"), false);
+            pdf.abrirPDF("Recibo "+txtFecha.getText()+"_"+txtCodigo.getText());
+            pdf.agregarMetaDatos("AsoMESYKY", "Recibo", "Administrador", "Yeily Calderon Marin");
+            pdf.agregarTitulos("Comprobante de recibo de AsoMESYKY", "", txtFecha.getText().toString());
+            pdf.agregarTabla(getEncabezados(), getDatos());
+            pdf.agregarTexto("Guardese cuidadosamente");
 
-            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.inversion);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            logo.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Image img = Image.getInstance(stream.toByteArray());
-
-            Table tabla = new Table(5);
-            for(int i = 0; i < 15; i++) {
-                tabla.addCell("Celda "+i);
-            }
-
-            doc.setHeader(cabecera);
-            doc.setFooter(pie);
-            doc.open();
-            doc.add(new Paragraph("Título"));
-            doc.add(new Paragraph("Título personalizado", tipoFuente1));
-            doc.add(img);
-            doc.add(tabla);
-
-            ColumnText.showTextAligned(pdf.getDirectContent(), Element.ALIGN_CENTER, new Paragraph("AsoMESYKY", tipoFuente2), 297.5f, 421,pdf.getPageNumber() % 2== 1 ? 45: -45);
-        }
-        catch(DocumentException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        catch(IOException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        finally {
-            doc.close();
-        }
-    }
-
-    private File CrearArchivo(String nombreArchivo) {
-        File archivo = null;
-
-        try {
-            File ruta = getRuta();
-
-
-            if(ruta != null) {
-                archivo = new File(ruta, nombreArchivo);
-            }
+            pdf.visualizarPDF(this);
         }
         catch(Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-        return archivo;
+        finally {
+            pdf.cerrarPDF();
+        }
     }
 
-    private File getRuta() {
-        File ruta = null;
+    private String[] getEncabezados() {
+        return new String[]{"Nombre", "Codigo", "Monto", "Otro"};
+    }
+
+    private ArrayList<String[]> getDatos() {
+        ArrayList<String[]> filas = new ArrayList<>();
 
         try {
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                ruta = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                        DIR_RECIBOS);
-
-                if (ruta != null) {
-                    if (!ruta.mkdirs()) {
-                        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
+            filas.add(new String[]{"Kimber", "01-0004", "10000", "Otra cosa"});
+            filas.add(new String[]{"Isis", "01-0005", "2000", "Otra cosa"});
+            filas.add(new String[]{"Emilio", "01-0006", "5000", "Otra cosa"});
         } catch(Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        return ruta;
+        return filas;
     }
 
     private void Limpiar() {
