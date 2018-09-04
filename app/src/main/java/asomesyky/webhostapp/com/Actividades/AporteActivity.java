@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import asomesyky.webhostapp.com.Entidades.Socio;
+import asomesyky.webhostapp.com.Globales.Correo;
 import asomesyky.webhostapp.com.Globales.Global;
 import asomesyky.webhostapp.com.Globales.YPDF;
 import asomesyky.webhostapp.com.R;
@@ -202,6 +203,15 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         }
     }
 
+    private void EnviarCorreo() {
+        Correo mail = new Correo(this);
+        try {
+            mail.enviar("Recibo", "Este es el cuerpo del correo.", "yeilycalderon@yahoo.es");
+        } catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
     private String[] getEncabezados() {
         return new String[]{"Nombre", "Codigo", "Monto", "Otro"};
     }
@@ -228,6 +238,7 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     public void btnDoc_Click(View view) {
-        GenerarRecibo();
+        //GenerarRecibo();
+        EnviarCorreo();
     }
 }
