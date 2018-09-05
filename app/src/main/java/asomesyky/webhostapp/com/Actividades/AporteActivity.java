@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 
@@ -252,14 +253,23 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     private PdfPCell[] getEncabezados() {
+        Font FORMATO = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
         PdfPCell[] celdas = new PdfPCell[COLS];
 
         try {
-            for (int i = 0; i < COLS; i++) {
-                PdfPCell celda = new PdfPCell();
+            for (Integer i = 0; i < COLS; i++) {
+                celdas[i] = new PdfPCell(new Phrase(i.toString(), FORMATO));
+                celdas[i].setBorder(0);
+                celdas[i].setBorderWidthBottom(1f);
+                celdas[i].setHorizontalAlignment(Element.ALIGN_CENTER);
+                celdas[i].setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+                /*PdfPCell celda = new PdfPCell(new Phrase(i.toString(), FORMATO));
                 celda.setBorder(0);
-                celda.setBorderWidthBottom(2f);
-                celdas[i] = celda;
+                celda.setBorderWidthBottom(1f);
+                celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+                celda.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                celdas[i] = celda;*/
             }
         }catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -268,9 +278,19 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         return celdas;
     }
 
-    private ArrayList<PdfPCell[]> getDatos() {
-        ArrayList<PdfPCell[]> filas = new ArrayList<>();
-        PdfPCell[] celdas = new PdfPCell[COLS];
+    private PdfPCell[][] getDatos() {
+        Font FORMATO = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+        PdfPCell[][] filas = new PdfPCell[11][COLS];
+        /*PdfPCell[] celdas0 = new PdfPCell[COLS];
+        PdfPCell[] celdas1 = new PdfPCell[COLS];
+        PdfPCell[] celdas2 = new PdfPCell[COLS];
+        PdfPCell[] celdas3 = new PdfPCell[COLS];
+        PdfPCell[] celdas4 = new PdfPCell[COLS];
+        PdfPCell[] celdas5 = new PdfPCell[COLS];
+        PdfPCell[] celdas6 = new PdfPCell[COLS];
+        PdfPCell[] celdas7 = new PdfPCell[COLS];
+        PdfPCell[] celdas8 = new PdfPCell[COLS];
+        PdfPCell[] celdas9 = new PdfPCell[COLS];*/
         /*PdfPCell celda0; //= new PdfPCell();
         PdfPCell celda1; //= new PdfPCell();
         PdfPCell celda2; //= new PdfPCell();
@@ -279,12 +299,12 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         PdfPCell celda5; //= new PdfPCell();*/
 
         try {
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[0][0] = new PdfPCell(new Phrase("1", FORMATO));
+            filas[0][1] = new PdfPCell(new Phrase("2", FORMATO));
+            filas[0][2] = new PdfPCell(new Phrase("3", FORMATO));
+            filas[0][3] = new PdfPCell(new Phrase("4", FORMATO));
+            filas[0][4] = new PdfPCell(new Phrase("5", FORMATO));
+            filas[0][5] = new PdfPCell(new Phrase("6", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -292,17 +312,17 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas0);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase("Fecha: "));
-            celdas[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[2] = new PdfPCell(new Phrase(txtFecha.getText().toString()));
-            celdas[2].setHorizontalAlignment(Element.ALIGN_LEFT);
-            celdas[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[1][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[1][1] = new PdfPCell(new Phrase("Fecha: ", FORMATO));
+            filas[1][1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[1][2] = new PdfPCell(new Phrase(txtFecha.getText().toString(), FORMATO));
+            filas[1][2].setHorizontalAlignment(Element.ALIGN_LEFT);
+            filas[1][2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[1][3] = new PdfPCell(new Phrase("", FORMATO));
+            filas[1][4] = new PdfPCell(new Phrase("", FORMATO));
+            filas[1][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -310,20 +330,20 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas1);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase("Periodo: "));
-            celdas[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[2] = new PdfPCell(new Phrase(cmbPeriodo.getSelectedItem().toString()));
-            celdas[2].setHorizontalAlignment(Element.ALIGN_CENTER);
-            celdas[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[3] = new PdfPCell(new Phrase("Año: "));
-            celdas[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[4] = new PdfPCell(new Phrase(txtAño.getText().toString()));
-            celdas[4].setHorizontalAlignment(Element.ALIGN_CENTER);
-            celdas[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[2][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[2][1] = new PdfPCell(new Phrase("Periodo: ", FORMATO));
+            filas[2][1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[2][2] = new PdfPCell(new Phrase(cmbPeriodo.getSelectedItem().toString()));
+            filas[2][2].setHorizontalAlignment(Element.ALIGN_CENTER);
+            filas[2][2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[2][3] = new PdfPCell(new Phrase("Año: ", FORMATO));
+            filas[2][3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[2][4] = new PdfPCell(new Phrase(txtAño.getText().toString(), FORMATO));
+            filas[2][4].setHorizontalAlignment(Element.ALIGN_CENTER);
+            filas[2][4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[2][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -331,14 +351,14 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas2);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[3][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[3][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[3][2] = new PdfPCell(new Phrase("", FORMATO));
+            filas[3][3] = new PdfPCell(new Phrase("", FORMATO));
+            filas[3][4] = new PdfPCell(new Phrase("", FORMATO));
+            filas[3][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -346,34 +366,34 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas3);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase("Socio: "));
-            celdas[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[2] = new PdfPCell(new Phrase(txtCodigo.getText().toString()));
-            celdas[2].setHorizontalAlignment(Element.ALIGN_LEFT);
-            celdas[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[3] = new PdfPCell(new Phrase("Nombre: "));
-            celdas[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[4] = new PdfPCell(new Phrase(cmbNombre.getSelectedItem().toString()));
-            celdas[4].setHorizontalAlignment(Element.ALIGN_LEFT);
-            celdas[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[4].setColspan(2);
+            filas[4][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[4][1] = new PdfPCell(new Phrase("Socio: ", FORMATO));
+            filas[4][1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[4][2] = new PdfPCell(new Phrase(txtCodigo.getText().toString(), FORMATO));
+            filas[4][2].setHorizontalAlignment(Element.ALIGN_LEFT);
+            filas[4][2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[4][3] = new PdfPCell(new Phrase("Nombre: ", FORMATO));
+            filas[4][3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[4][4] = new PdfPCell(new Phrase(cmbNombre.getSelectedItem().toString(), FORMATO));
+            filas[4][4].setHorizontalAlignment(Element.ALIGN_LEFT);
+            filas[4][4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[4][4].setColspan(2);
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
             celdas[2] = celda2;
             celdas[3] = celda3;
             celdas[4] = celda4;*/
-            filas.add(celdas);
+            //filas.add(celdas4);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[5][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[5][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[5][2] = new PdfPCell(new Phrase("", FORMATO));
+            filas[5][3] = new PdfPCell(new Phrase("", FORMATO));
+            filas[5][4] = new PdfPCell(new Phrase("", FORMATO));
+            filas[5][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -381,17 +401,17 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas5);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase("Monto: "));
-            celdas[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
-            celdas[4] = new PdfPCell(new Phrase(txtMonto.getText().toString()));
-            celdas[4].setHorizontalAlignment(Element.ALIGN_LEFT);
-            celdas[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[6][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[6][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[6][2] = new PdfPCell(new Phrase("", FORMATO));
+            filas[6][3] = new PdfPCell(new Phrase("Monto: "));
+            filas[6][3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            filas[6][4] = new PdfPCell(new Phrase(txtMonto.getText().toString(), FORMATO));
+            filas[6][4].setHorizontalAlignment(Element.ALIGN_LEFT);
+            filas[6][4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            filas[6][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -399,14 +419,14 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
+            //filas.add(celdas6);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[7][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[7][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[7][2] = new PdfPCell(new Phrase("", FORMATO));
+            filas[7][3] = new PdfPCell(new Phrase("", FORMATO));
+            filas[7][4] = new PdfPCell(new Phrase("", FORMATO));
+            filas[7][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -414,29 +434,29 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
-            filas.add(celdas);
-            filas.add(celdas);
+            //filas.add(celdas7);
+            //filas.add(celdas7);
+            //filas.add(celdas7);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase("Firma recibido"));
-            celdas[2].setColspan(3);
-            celdas[2].setBorderWidthTop(2);
-            celdas[3] = new PdfPCell(new Phrase(""));
+            filas[8][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[8][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[8][2] = new PdfPCell(new Phrase("Firma recibido", FORMATO));
+            filas[8][2].setColspan(3);
+            filas[8][2].setBorderWidthTop(2);
+            filas[8][3] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
             celdas[2] = celda2;
             celdas[3] = celda3;*/
-            filas.add(celdas);
+            //filas.add(celdas8);
             ////////////////////////////////////////////////
-            celdas[0] = new PdfPCell(new Phrase(""));
-            celdas[1] = new PdfPCell(new Phrase(""));
-            celdas[2] = new PdfPCell(new Phrase(""));
-            celdas[3] = new PdfPCell(new Phrase(""));
-            celdas[4] = new PdfPCell(new Phrase(""));
-            celdas[5] = new PdfPCell(new Phrase(""));
+            filas[9][0] = new PdfPCell(new Phrase("", FORMATO));
+            filas[9][1] = new PdfPCell(new Phrase("", FORMATO));
+            filas[9][2] = new PdfPCell(new Phrase("", FORMATO));
+            filas[9][3] = new PdfPCell(new Phrase("", FORMATO));
+            filas[9][4] = new PdfPCell(new Phrase("", FORMATO));
+            filas[9][5] = new PdfPCell(new Phrase("", FORMATO));
 
             /*celdas[0] = celda0;
             celdas[1] = celda1;
@@ -444,14 +464,209 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
             celdas[3] = celda3;
             celdas[4] = celda4;
             celdas[5] = celda5;*/
-            filas.add(celdas);
-            filas.add(celdas);
+            //filas.add(celdas9);
+            //filas.add(celdas9);
         } catch(Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         return filas;
     }
+
+    /*private ArrayList<PdfPCell[]> getDatos() {
+        Font FORMATO = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+        ArrayList<PdfPCell[]> filas = new ArrayList<>();
+        PdfPCell[] celdas0 = new PdfPCell[COLS];
+        PdfPCell[] celdas1 = new PdfPCell[COLS];
+        PdfPCell[] celdas2 = new PdfPCell[COLS];
+        PdfPCell[] celdas3 = new PdfPCell[COLS];
+        PdfPCell[] celdas4 = new PdfPCell[COLS];
+        PdfPCell[] celdas5 = new PdfPCell[COLS];
+        PdfPCell[] celdas6 = new PdfPCell[COLS];
+        PdfPCell[] celdas7 = new PdfPCell[COLS];
+        PdfPCell[] celdas8 = new PdfPCell[COLS];
+        PdfPCell[] celdas9 = new PdfPCell[COLS];
+        *//*PdfPCell celda0; //= new PdfPCell();
+        PdfPCell celda1; //= new PdfPCell();
+        PdfPCell celda2; //= new PdfPCell();
+        PdfPCell celda3; //= new PdfPCell();
+        PdfPCell celda4; //= new PdfPCell();
+        PdfPCell celda5; //= new PdfPCell();*//*
+
+        try {
+            celdas0[0] = new PdfPCell(new Phrase("1", FORMATO));
+            celdas0[1] = new PdfPCell(new Phrase("2", FORMATO));
+            celdas0[2] = new PdfPCell(new Phrase("3", FORMATO));
+            celdas0[3] = new PdfPCell(new Phrase("4", FORMATO));
+            celdas0[4] = new PdfPCell(new Phrase("5", FORMATO));
+            celdas0[5] = new PdfPCell(new Phrase("6", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas0);
+            ////////////////////////////////////////////////
+            celdas1[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas1[1] = new PdfPCell(new Phrase("Fecha: ", FORMATO));
+            celdas1[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas1[2] = new PdfPCell(new Phrase(txtFecha.getText().toString(), FORMATO));
+            celdas1[2].setHorizontalAlignment(Element.ALIGN_LEFT);
+            celdas1[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas1[3] = new PdfPCell(new Phrase("", FORMATO));
+            celdas1[4] = new PdfPCell(new Phrase("", FORMATO));
+            celdas1[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas1);
+            ////////////////////////////////////////////////
+            celdas2[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas2[1] = new PdfPCell(new Phrase("Periodo: ", FORMATO));
+            celdas2[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas2[2] = new PdfPCell(new Phrase(cmbPeriodo.getSelectedItem().toString()));
+            celdas2[2].setHorizontalAlignment(Element.ALIGN_CENTER);
+            celdas2[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas2[3] = new PdfPCell(new Phrase("Año: ", FORMATO));
+            celdas2[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas2[4] = new PdfPCell(new Phrase(txtAño.getText().toString(), FORMATO));
+            celdas2[4].setHorizontalAlignment(Element.ALIGN_CENTER);
+            celdas2[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas2[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas2);
+            ////////////////////////////////////////////////
+            celdas3[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas3[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas3[2] = new PdfPCell(new Phrase("", FORMATO));
+            celdas3[3] = new PdfPCell(new Phrase("", FORMATO));
+            celdas3[4] = new PdfPCell(new Phrase("", FORMATO));
+            celdas3[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas3);
+            ////////////////////////////////////////////////
+            celdas4[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas4[1] = new PdfPCell(new Phrase("Socio: ", FORMATO));
+            celdas4[1].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas4[2] = new PdfPCell(new Phrase(txtCodigo.getText().toString(), FORMATO));
+            celdas4[2].setHorizontalAlignment(Element.ALIGN_LEFT);
+            celdas4[2].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas4[3] = new PdfPCell(new Phrase("Nombre: ", FORMATO));
+            celdas4[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas4[4] = new PdfPCell(new Phrase(cmbNombre.getSelectedItem().toString(), FORMATO));
+            celdas4[4].setHorizontalAlignment(Element.ALIGN_LEFT);
+            celdas4[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas4[4].setColspan(2);
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;*//*
+            filas.add(celdas4);
+            ////////////////////////////////////////////////
+            celdas5[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas5[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas5[2] = new PdfPCell(new Phrase("", FORMATO));
+            celdas5[3] = new PdfPCell(new Phrase("", FORMATO));
+            celdas5[4] = new PdfPCell(new Phrase("", FORMATO));
+            celdas5[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas5);
+            ////////////////////////////////////////////////
+            celdas6[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas6[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas6[2] = new PdfPCell(new Phrase("", FORMATO));
+            celdas6[3] = new PdfPCell(new Phrase("Monto: "));
+            celdas6[3].setHorizontalAlignment(Element.ALIGN_RIGHT);
+            celdas6[4] = new PdfPCell(new Phrase(txtMonto.getText().toString(), FORMATO));
+            celdas6[4].setHorizontalAlignment(Element.ALIGN_LEFT);
+            celdas6[4].setBackgroundColor(BaseColor.LIGHT_GRAY);
+            celdas6[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas6);
+            ////////////////////////////////////////////////
+            celdas7[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas7[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas7[2] = new PdfPCell(new Phrase("", FORMATO));
+            celdas7[3] = new PdfPCell(new Phrase("", FORMATO));
+            celdas7[4] = new PdfPCell(new Phrase("", FORMATO));
+            celdas7[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas7);
+            filas.add(celdas7);
+            filas.add(celdas7);
+            ////////////////////////////////////////////////
+            celdas8[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas8[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas8[2] = new PdfPCell(new Phrase("Firma recibido", FORMATO));
+            celdas8[2].setColspan(3);
+            celdas8[2].setBorderWidthTop(2);
+            celdas8[3] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;*//*
+            filas.add(celdas8);
+            ////////////////////////////////////////////////
+            celdas9[0] = new PdfPCell(new Phrase("", FORMATO));
+            celdas9[1] = new PdfPCell(new Phrase("", FORMATO));
+            celdas9[2] = new PdfPCell(new Phrase("", FORMATO));
+            celdas9[3] = new PdfPCell(new Phrase("", FORMATO));
+            celdas9[4] = new PdfPCell(new Phrase("", FORMATO));
+            celdas9[5] = new PdfPCell(new Phrase("", FORMATO));
+
+            *//*celdas[0] = celda0;
+            celdas[1] = celda1;
+            celdas[2] = celda2;
+            celdas[3] = celda3;
+            celdas[4] = celda4;
+            celdas[5] = celda5;*//*
+            filas.add(celdas9);
+            filas.add(celdas9);
+        } catch(Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        return filas;
+    }*/
 
     private void Limpiar() {
         txtCodigo.setText("");
@@ -461,9 +676,7 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
     }
 
     public void btnDoc_Click(View view) {
-        Toast.makeText(this, "Reporte", Toast.LENGTH_LONG).show();
         GenerarRecibo();
-        Toast.makeText(this, "Correo", Toast.LENGTH_LONG).show();
         EnviarCorreo();
         Limpiar();
     }

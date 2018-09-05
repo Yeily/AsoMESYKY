@@ -53,6 +53,7 @@ public class YPDF {
             pdf.createNewFile();
         } catch(IOException ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -65,6 +66,7 @@ public class YPDF {
             doc.open();
         } catch (Exception ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -95,6 +97,7 @@ public class YPDF {
             doc.add(parrafo);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -106,6 +109,7 @@ public class YPDF {
             doc.add(parrafo);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -143,10 +147,11 @@ public class YPDF {
             doc.add(parrafo);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
-    public void agregarTabla(PdfPCell[] encabezados, ArrayList<PdfPCell[]> filas) {
+    public void agregarTabla(PdfPCell[] encabezados, PdfPCell[][] filas) {
         try {
             Paragraph parrafo = new Paragraph();
             parrafo.setFont(FUENTE_SUBTITULO);
@@ -154,16 +159,17 @@ public class YPDF {
             tabla.setWidthPercentage(100);
             tabla.setSpacingBefore(20);
 
-            for(int c = 0; c < encabezados.length; c++) {
+            for(Integer c = 0; c < encabezados.length; c++) {
                 tabla.addCell(encabezados[c]);
             }
+Toast.makeText(pContexto, filas.length, Toast.LENGTH_LONG).show();
+            for (Integer f = 0; f < filas.length; f++) {
+                //PdfPCell celda;
 
-            for (int f = 0; f < filas.size(); f++) {
-                PdfPCell[] fila = filas.get(f);
-
-                for (int c = 0; c < encabezados.length; c++) {
-                    fila[c].setFixedHeight(20);
-                    tabla.addCell(fila[c]);
+                for (Integer c = 0; c < encabezados.length; c++) {
+                    PdfPCell celda = filas[f][c];
+                    celda.setFixedHeight(30);
+                    tabla.addCell(celda);
                 }
             }
 
@@ -171,6 +177,7 @@ public class YPDF {
             doc.add(parrafo);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
+            Toast.makeText(pContexto, ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
