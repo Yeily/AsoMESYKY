@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import asomesyky.webhostapp.com.Entidades.Socio;
 public class Global {
 
     public static String URL = "https://asomesyky.000webhostapp.com/consultas.php";
+    public static String RUTA_RECIBOS = android.os.Environment.getExternalStorageDirectory().toString()+"/"+Environment.DIRECTORY_DOWNLOADS+"/Recibos_AsoMESYKY";
 
     public static Socio usuarioActual;
 

@@ -42,8 +42,7 @@ public class YPDF {
     }
 
     private void crearPDF(String nombrePDF) {
-        File folder = new File(Environment.getExternalStorageDirectory().toString(), Environment.DIRECTORY_DOWNLOADS);
-        folder = new File(folder, "Recibos_AsoMESYKY");
+        File folder = new File(Global.RUTA_RECIBOS);
 
         if(!folder.exists()) {
             folder.mkdirs();
@@ -55,11 +54,6 @@ public class YPDF {
         } catch(IOException ex) {
             Log.e("Error", ex.toString());
         }
-    }
-
-    private void agregarParrafoHijo(Paragraph parrafoHijo) {
-        parrafoHijo.setAlignment(Element.ALIGN_CENTER);
-        parrafoHijo.add(parrafoHijo);
     }
 
     public void abrirPDF(String nombrePDF) {
@@ -92,10 +86,12 @@ public class YPDF {
     public void agregarTitulos(String titulo, String subtitulo, String fecha) {
         try {
             Paragraph parrafo = new Paragraph();
-            agregarParrafoHijo(new Paragraph(titulo, FUENTE_TITULO));
-            agregarParrafoHijo(new Paragraph(subtitulo, FUENTE_SUBTITULO));
-            agregarParrafoHijo(new Paragraph("Generado: "+fecha, FUENTE_RESALTADO));
+            parrafo.setAlignment(Element.ALIGN_CENTER);
+            parrafo.add(new Paragraph(titulo, FUENTE_TITULO));
+            parrafo.add(new Paragraph(subtitulo, FUENTE_SUBTITULO));
+            parrafo.add(new Paragraph("Generado: "+fecha, FUENTE_RESALTADO));
             parrafo.setSpacingAfter(30);
+
             doc.add(parrafo);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
@@ -113,7 +109,7 @@ public class YPDF {
         }
     }
 
-    public void agregarTabla(String[] encabezados, ArrayList<String[]> filas) {
+    public void agregarTabla(String[] encabezados, ArrayList<String[]> filas, BaseColor colorFondo) {
         PdfPCell celda;
         int col = 0;
 
@@ -127,7 +123,7 @@ public class YPDF {
             while (col < encabezados.length) {
                 celda = new PdfPCell(new Phrase(encabezados[col++], FUENTE_SUBTITULO));
                 celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-                celda.setBackgroundColor(BaseColor.GREEN);
+                if(colorFondo != null) celda.setBackgroundColor(colorFondo);
                 tabla.addCell(celda);
             }
 
@@ -138,7 +134,36 @@ public class YPDF {
                     celda = new PdfPCell(new Phrase(fila[col]));
                     celda.setHorizontalAlignment(Element.ALIGN_CENTER);
                     celda.setFixedHeight(30);
+                    celda.setBorder(0);
                     tabla.addCell(celda);
+                }
+            }
+
+            parrafo.add(tabla);
+            doc.add(parrafo);
+        } catch(Exception ex) {
+            Log.e("Error", ex.toString());
+        }
+    }
+
+    public void agregarTabla(PdfPCell[] encabezados, ArrayList<PdfPCell[]> filas) {
+        try {
+            Paragraph parrafo = new Paragraph();
+            parrafo.setFont(FUENTE_SUBTITULO);
+            PdfPTable tabla = new PdfPTable(encabezados.length);
+            tabla.setWidthPercentage(100);
+            tabla.setSpacingBefore(20);
+
+            for(int c = 0; c < encabezados.length; c++) {
+                tabla.addCell(encabezados[c]);
+            }
+
+            for (int f = 0; f < filas.size(); f++) {
+                PdfPCell[] fila = filas.get(f);
+
+                for (int c = 0; c < encabezados.length; c++) {
+                    fila[c].setFixedHeight(20);
+                    tabla.addCell(fila[c]);
                 }
             }
 

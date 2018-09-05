@@ -13,14 +13,20 @@ import java.io.OutputStream;
 import java.security.Security;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class Correo  extends Authenticator {
     private String pUsuario = "yeilycalderonmarin@gmail.com";
@@ -65,32 +71,9 @@ public class Correo  extends Authenticator {
         });
     }
 
-    public synchronized void enviar(String asunto, String cuerpo, String para) throws Exception {
+    public synchronized void enviar(String para, String asunto, String cuerpo) {
         try {
-            /*BodyPart texto = new MimeBodyPart();
-            texto.setText(cuerpo);
-
-            BodyPart adjunto = new MimeBodyPart();
-            adjunto.setDataHandler(new DataHandler(new FileDataSource(Environment.getExternalStorageDirectory()+"/DCIM/Camera/imagen.jpg")));
-            adjunto.setFileName("imagen.jpg");
-
-            Multipart multiParte = new MimeMultipart();
-            multiParte.addBodyPart(texto);
-            multiParte.addBodyPart(adjunto);
-
-            MimeMessage message = new MimeMessage(sesion);
-            message.setFrom(new InternetAddress(pUsuario));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
-            message.setSubject(asunto);
-            message.setContent(multiParte);
-
-            Transport t = sesion.getTransport("smtp");
-            t.connect(pUsuario,pPass);
-            t.sendMessage(message,message.getAllRecipients());
-            t.close();*/
-
-
-            /*if(sesion != null) {
+            if(sesion != null) {
                 Message mensaje = new MimeMessage(sesion);
                 mensaje.setFrom(new InternetAddress(pUsuario));
                 mensaje.setSubject(asunto);
@@ -103,10 +86,40 @@ public class Correo  extends Authenticator {
                 }
 
                 Transport.send(mensaje);
-            }*/
+            }
         } catch(Exception ex) {
-            //Log.i("Error: ", ex.getMessage());
-            Toast.makeText(pContexto, ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(pContexto, "Error: "+ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public synchronized void enviar(String para, String asunto, String cuerpo, String rutaAdjunto) {
+        int pos = rutaAdjunto.lastIndexOf("/");
+        String nombreAdjunto = rutaAdjunto.substring(pos + 1);
+
+        try {
+            BodyPart texto = new MimeBodyPart();
+            texto.setText(cuerpo);
+
+            BodyPart adjunto = new MimeBodyPart();
+            adjunto.setDataHandler(new DataHandler(new FileDataSource(rutaAdjunto)));
+            adjunto.setFileName(nombreAdjunto);
+
+            Multipart multiParte = new MimeMultipart();
+            multiParte.addBodyPart(texto);
+            multiParte.addBodyPart(adjunto);
+
+            MimeMessage mensaje = new MimeMessage(sesion);
+            mensaje.setFrom(new InternetAddress(pUsuario));
+            mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
+            mensaje.setSubject(asunto);
+            mensaje.setContent(multiParte);
+
+            Transport t = sesion.getTransport("smtp");
+            t.connect(pUsuario,pPass);
+            t.sendMessage(mensaje,mensaje.getAllRecipients());
+            t.close();
+        } catch(Exception ex) {
+            Toast.makeText(pContexto, "Error: "+ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
