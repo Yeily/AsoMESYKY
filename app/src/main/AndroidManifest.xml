@@ -30,7 +30,8 @@
         <activity android:name=".Actividades.PasswordActivity" />
         <activity android:name=".Actividades.LiquidaInvActivity" />
         <activity android:name=".Actividades.InversionesActivity" />
-        <activity android:name=".Actividades.MayorActivity"></activity>
+        <activity android:name=".Actividades.MayorActivity" />
+        <activity android:name=".Actividades.GastoActivity"></activity>
     </application>
 
 </manifest>

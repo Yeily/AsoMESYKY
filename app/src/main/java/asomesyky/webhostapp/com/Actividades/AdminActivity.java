@@ -33,10 +33,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 i = new Intent(this, LiquidaInvActivity.class);
                 break;
             case R.id.btnGasto:
-                i = new Intent(this, AporteActivity.class);
+                i = new Intent(this, GastoActivity.class);
                 break;
             case R.id.btnResetPass:
-                i = new Intent(this, AporteActivity.class);
+                i = new Intent(this, PasswordActivity.class);
                 break;
         }
 

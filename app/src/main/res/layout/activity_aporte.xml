@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondoApp"
     tools:context=".Actividades.AporteActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -128,6 +129,13 @@
                 android:textAlignment="center"/>
         </LinearLayout>
 
+        <Switch
+            android:id="@+id/swtEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enviar recibo"
+            android:layout_gravity="right"/>
+
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
@@ -137,15 +145,6 @@
             android:hint="Guardar"
             android:theme="@style/TemaBotones"
             android:onClick="btnGuardar_Click"/>
-        <Button
-            android:id="@+id/btnDoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/guardar"
-            android:hint="Guardar"
-            android:theme="@style/TemaBotones"
-            android:onClick="btnDoc_Click"/>
 
     </LinearLayout>
 

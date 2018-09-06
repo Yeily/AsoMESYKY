@@ -77,6 +77,7 @@ public class MayorActivity extends AppCompatActivity implements Response.ErrorLi
 
         //seteamos los valores de Y y los colores
         PieDataSet set1 = new PieDataSet(valores,"Socios");
+        set1.setValueTextSize(12);
         set1.setSliceSpace(1);
         set1.setColors(colors);
 

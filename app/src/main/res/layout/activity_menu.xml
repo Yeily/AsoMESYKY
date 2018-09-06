@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondoApp"
     tools:context=".Actividades.MenuActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -67,12 +68,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ver inversiones"
+            android:theme="@style/TemaBotones"
             android:onClick="btnInversiones_Click"/>
         <Button
             android:id="@+id/btnMayor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ver distribución"
+            android:theme="@style/TemaBotones"
             android:onClick="btnMayor_Click"/>
     </LinearLayout>
 

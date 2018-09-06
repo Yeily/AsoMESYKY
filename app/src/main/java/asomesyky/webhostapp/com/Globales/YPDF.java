@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -85,14 +86,15 @@ public class YPDF {
 
     public void agregarTitulos(String titulo, String subtitulo, String fecha) {
         try {
-            Paragraph parrafo = new Paragraph();
-            parrafo.setAlignment(Element.ALIGN_CENTER);
-            parrafo.add(new Paragraph(titulo, FUENTE_TITULO));
-            parrafo.add(new Paragraph(subtitulo, FUENTE_SUBTITULO));
-            parrafo.add(new Paragraph("Generado: "+fecha, FUENTE_RESALTADO));
-            parrafo.setSpacingAfter(30);
+            Paragraph titulos = new Paragraph();
+            Paragraph tit = new Paragraph(titulo, FUENTE_TITULO);
+            tit.setAlignment(Element.ALIGN_CENTER);
+            titulos.add(tit);
+            titulos.add(new Paragraph(subtitulo, FUENTE_SUBTITULO));
+            titulos.add(new Paragraph("Generado: "+fecha, FUENTE_RESALTADO));
+            titulos.setSpacingAfter(30);
 
-            doc.add(parrafo);
+            doc.add(titulos);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
         }
@@ -104,6 +106,14 @@ public class YPDF {
             parrafo.setSpacingAfter(5);
             parrafo.setSpacingBefore(5);
             doc.add(parrafo);
+        } catch(Exception ex) {
+            Log.e("Error", ex.toString());
+        }
+    }
+
+    public void agregarTexto(Paragraph texto) {
+        try {
+            doc.add(texto);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
         }
@@ -169,6 +179,15 @@ public class YPDF {
 
             parrafo.add(tabla);
             doc.add(parrafo);
+        } catch(Exception ex) {
+            Log.e("Error", ex.toString());
+        }
+    }
+
+    public void agregarImagen(Image imagen, float posX, float posY) {
+        try {
+            imagen.setAbsolutePosition(posX, posY);
+            doc.add(imagen);
         } catch(Exception ex) {
             Log.e("Error", ex.toString());
         }

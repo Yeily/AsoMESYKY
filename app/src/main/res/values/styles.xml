@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="Titulo">
-        <item name="android:textColor">@color/Titulo</item>
+        <item name="android:textColor">#ffffff</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">25dp</item>
     </style>
@@ -17,7 +17,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="TemaBotones">
-        <item name="android:colorButtonNormal" tools:targetApi="lollipop">#FF00FF</item>
+        <item name="android:colorButtonNormal" tools:targetApi="lollipop">#868686</item>
     </style>
 
 </resources>

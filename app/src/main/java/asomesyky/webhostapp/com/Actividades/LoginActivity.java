@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 } else if(txtPass.getText().toString().equals(user.getPass())) {
                     txtPass.setText("");
 
-                    if(USUARIO.equals("00-000")) {
+                    if(USUARIO.trim().equals("00-000")) {
                         startActivity(new Intent(this, AdminActivity.class));
                     } else {
                         startActivity(new Intent(this, MenuActivity.class));
