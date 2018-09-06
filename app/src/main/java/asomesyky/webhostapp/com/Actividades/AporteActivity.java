@@ -240,7 +240,9 @@ public class AporteActivity extends AppCompatActivity implements Response.Listen
         Correo mail = new Correo(this);
 
         try {
-            mail.enviar(correo, "Recibo", "Este es el cuerpo del correo.", Global.RUTA_RECIBOS+"/Recibo_"+txtFecha.getText()+"_"+txtCodigo.getText()+".pdf");
+            String cuerpo = "Estimad@ "+cmbNombre.getSelectedItem().toString()+
+                    ":\nAdjunto encontrará su recibo por el aporte de ahorro de la asociación.\n\n\nSaludos,\nYeily Calderón Marín.";
+            mail.enviar(correo, "Recibo AsoMESYKY", cuerpo, Global.RUTA_RECIBOS+"/Recibo_"+txtFecha.getText()+"_"+txtCodigo.getText()+".pdf");
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
         }

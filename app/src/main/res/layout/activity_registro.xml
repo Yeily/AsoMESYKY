@@ -65,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/telefono"
-            android:hint="Teléfono" />
+            android:hint="Teléfono"
+            android:inputType="number"/>
 
         <EditText
             android:id="@+id/txtCorreo"
