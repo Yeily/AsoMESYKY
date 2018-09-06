@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Actividades.LoginActivity">
+        <activity android:name=".Actividades.AporteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,7 @@
         <activity android:name=".Actividades.InversionActivity" />
         <activity android:name=".Actividades.AdminActivity" />
         <activity android:name=".Actividades.RegistroActivity" />
-        <activity android:name=".Actividades.AporteActivity" />
+        <activity android:name=".Actividades.LoginActivity" />
         <activity android:name=".Actividades.PasswordActivity" />
         <activity android:name=".Actividades.LiquidaInvActivity" />
         <activity android:name=".Actividades.InversionesActivity" />
