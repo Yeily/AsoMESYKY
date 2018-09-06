@@ -27,6 +27,7 @@ dependencies {
     //implementation 'com.android.volley:volley:1.1.1'
     implementation files('libs/volley-1.1.1.aar')
     implementation files('libs/itextpdf-5.5.13.jar')
+    implementation files('libs/commons-codec-1.9.jar')
     implementation project(':graficos')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

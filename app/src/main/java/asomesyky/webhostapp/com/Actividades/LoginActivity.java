@@ -91,24 +91,28 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
 
                 Global.usuarioActual = user;
 
-                if (user.getPass().isEmpty() || user.getPass().equals(" ")) {
-                    startActivity(new Intent(this, PasswordActivity.class));
-                } else if(txtPass.getText().toString().equals(user.getPass())) {
-                    txtPass.setText("");
+                try {
+                    if (user.getPass().isEmpty() || user.getPass().equals(" ") || user.getPass().equals(user.getCodigo().toString())) {
+                        startActivity(new Intent(this, PasswordActivity.class));
+                    } else if (txtPass.getText().toString().equals(Global.Desencriptar(user.getPass()))) {
+                        txtPass.setText("");
 
-                    if(USUARIO.trim().equals("00-000")) {
-                        startActivity(new Intent(this, AdminActivity.class));
+                        if (USUARIO.trim().equals("00-000")) {
+                            startActivity(new Intent(this, AdminActivity.class));
+                        } else {
+                            startActivity(new Intent(this, MenuActivity.class));
+                        }
                     } else {
-                        startActivity(new Intent(this, MenuActivity.class));
+                        Toast.makeText(this, "La contraseña es incorrecta.", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(this, "La contraseña es incorrecta.", Toast.LENGTH_SHORT).show();
+                }catch (Exception ex) {
+                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(this, response.getString("resultado"), Toast.LENGTH_SHORT).show();
             }
-        } catch (JSONException e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        } catch (JSONException ex) {
+            Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

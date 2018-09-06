@@ -52,45 +52,51 @@ public class PasswordActivity extends AppCompatActivity {
 
     public void barNavegacion_Click(View view) { finish(); }
 
-    public void btnCambiar_Click(View view) {
-        if(txtNueva.getText().toString().equals(txtConfirma.getText().toString())) {
-            strJSON = new StringRequest(Request.Method.POST, Global.URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject respuestaJSON = new JSONObject(response);
-                        String estado = respuestaJSON.getString("resultado");
+    public void btnCambiar_Click(View view) throws Exception {
+        try {
+            if (txtNueva.getText().toString().equals(txtConfirma.getText().toString())) {
+                final String pass = Global.Encriptar(txtNueva.getText().toString());
 
-                        if (estado.equals("OK")) {
-                            Toast.makeText(getApplication(), "La contraseña se ha establecido correctamente.", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                strJSON = new StringRequest(Request.Method.POST, Global.URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuestaJSON = new JSONObject(response);
+                            String estado = respuestaJSON.getString("resultado");
+
+                            if (estado.equals("OK")) {
+                                Toast.makeText(getApplication(), "La contraseña se ha establecido correctamente.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_SHORT).show();
                         }
-                    } catch (JSONException e) {
-                        Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
-                    Log.i("ERROR", error.toString());
-                }
-            }) {
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("c", "6");
-                    params.put("socio", txtSocio.getText().toString());
-                    params.put("pass", txtNueva.getText().toString());
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplication(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Log.i("ERROR", error.toString());
+                    }
+                }) {
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("c", "6");
+                        params.put("socio", txtSocio.getText().toString());
+                        params.put("pass", pass);
 
-                    return params;
-                }
-            };
+                        return params;
+                    }
+                };
 
-            respuesta.add(strJSON);
-        } else {
-            Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+                respuesta.add(strJSON);
+            } else {
+                Toast.makeText(this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+            }
+        } catch(Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

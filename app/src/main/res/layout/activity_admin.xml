@@ -136,6 +136,7 @@
                 android:layout_gravity="center"
                 android:text="Resetear contraseña: "/>
             <EditText
+                android:id="@+id/txtCodigo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
