@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/calendario"
                     android:theme="@style/TemaBotones"
-                    android:onClick="btnFechaInicio_Click"/>
+                    android:onClick="btnFecha_Click"/>
             </LinearLayout>
 
             <EditText

@@ -161,7 +161,7 @@ public class YPDF {
         }
     }
 
-    public void agregarTabla(PdfPCell[] encabezados, PdfPCell[][] filas) {
+    public void agregarTabla(PdfPCell[] encabezados, ArrayList<PdfPCell[]> filas) {
         try {
             Paragraph parrafo = new Paragraph();
             parrafo.setFont(FUENTE_SUBTITULO);
@@ -172,14 +172,13 @@ public class YPDF {
             for(Integer c = 0; c < encabezados.length; c++) {
                 tabla.addCell(encabezados[c]);
             }
-Toast.makeText(pContexto, filas.length, Toast.LENGTH_LONG).show();
-            for (Integer f = 0; f < filas.length; f++) {
-                //PdfPCell celda;
 
-                for (Integer c = 0; c < encabezados.length; c++) {
-                    PdfPCell celda = filas[f][c];
-                    celda.setFixedHeight(30);
-                    tabla.addCell(celda);
+            for (int f = 0; f < filas.size(); f++) {
+                PdfPCell[] celdas = filas.get(f);
+
+                for (int c = 0; c < encabezados.length; c++) {
+                    celdas[c].setFixedHeight(20);
+                    tabla.addCell(celdas[c]);
                 }
             }
 
