@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -49,8 +48,6 @@ public class PasswordActivity extends AppCompatActivity {
 
         InicializarComponentes();
     }
-
-    public void barNavegacion_Click(View view) { finish(); }
 
     public void btnCambiar_Click(View view) throws Exception {
         try {

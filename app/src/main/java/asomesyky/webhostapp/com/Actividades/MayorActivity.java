@@ -101,8 +101,6 @@ public class MayorActivity extends AppCompatActivity implements Response.ErrorLi
         InicializarComponentes();
     }
 
-    public void barNavegacion_Click(View view) { finish(); }
-
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();

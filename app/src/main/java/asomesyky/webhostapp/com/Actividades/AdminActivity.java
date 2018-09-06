@@ -79,10 +79,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void barNavegacion_Click(View view) {
-        finish();
-    }
-
     private void CambiarClave() {
         strJSON = new StringRequest(Request.Method.POST, Global.URL, new Response.Listener<String>() {
             @Override

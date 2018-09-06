@@ -58,8 +58,6 @@ public class LiquidaInvActivity extends AppCompatActivity implements View.OnClic
         InicializarComponentes();
     }
 
-    public void barNavegacion_Click(View view) { finish(); }
-
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();

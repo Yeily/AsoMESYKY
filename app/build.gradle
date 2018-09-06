@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        YeilyAPK {
+            keyAlias 'Yeily'
+            keyPassword '14111979'
+            storeFile file('C:/Yeily/Proyectos/Android/Android_Studio/firma_digital.jks')
+            storePassword 'ShirAimi1411'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "asomesyky.webhostapp.com"
@@ -14,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.YeilyAPK
+        }
+        debug {
+            signingConfig signingConfigs.YeilyAPK
         }
     }
 }

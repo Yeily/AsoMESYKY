@@ -55,8 +55,6 @@ public class GastoActivity extends AppCompatActivity {
         InicializarComponentes();
     }
 
-    public void barNavegacion_Click(View view) { finish(); }
-
     public void btnFecha_Click(View view) {
         Global.setFecha(this, txtFecha);
     }

@@ -79,10 +79,6 @@ public class MenuActivity extends AppCompatActivity implements Response.Listener
         }
     }
 
-    public void barNavegacion_Click(View view) {
-        finish();
-    }
-
     private void RefescarInformacion() {
         String url = Global.URL+"?c=3&socio="+ Global.usuarioActual.getCodigo();
 

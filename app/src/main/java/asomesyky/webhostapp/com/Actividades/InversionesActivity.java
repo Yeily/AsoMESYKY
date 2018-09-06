@@ -81,6 +81,4 @@ public class InversionesActivity extends AppCompatActivity implements Response.L
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void barNavegacion_Click(View view) { finish(); }
 }
